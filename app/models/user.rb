@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
 
   validates :username, uniqueness: true, presence: true, allow_blank: false
 
+  has_many :articles, dependent: :destroy
+
   def generate_jwt
     JWT.encode({ id: self.id,
                 exp: 60.days.from_now.to_i },
