@@ -10,6 +10,9 @@ class User < ActiveRecord::Base
   has_many :favorites, dependent: :destroy
   has_many :comments, dependent: :destroy
 
+  acts_as_follower
+  acts_as_followable
+
   def generate_jwt
     JWT.encode({ id: self.id,
                 exp: 60.days.from_now.to_i },
